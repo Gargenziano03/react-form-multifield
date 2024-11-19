@@ -14,7 +14,7 @@ const articoliBlog = [
 
 const initialFormData = {
     name: '',
-    imge: '',
+    image: '',
     contenuto: '',
     categoria: '',
     tag: ''
@@ -24,7 +24,7 @@ export default function AppMain() {
 
     const [articoli, setArticoli] = useState(articoliBlog)
     const [newArticoli, setNewArticoli] = useState('')
-    const [formData, setFormData] = useState()
+    const [formData, setFormData] = useState(initialFormData)
 
     function addArticolo(e) {
         e.preventDefault()
@@ -45,6 +45,13 @@ export default function AppMain() {
 
     function handleFormSubmit(e) {
         e.preventDefault
+    }
+
+    function handleFormField(e) {
+        setFormData({
+            ...formData,
+            [e.target.name]: e.target.value
+        })
     }
     return (
         <main>
@@ -94,6 +101,8 @@ export default function AppMain() {
                                 id="name"
                                 aria-describedby="articolo"
                                 placeholder="articolo"
+                                value={formData.name}
+                                onChange={handleFormField}
                             />
                             <small id="namehelpId" className="form-text text-muted"></small>
                         </div>
@@ -107,6 +116,8 @@ export default function AppMain() {
                                 id="image"
                                 aria-describedby="image"
                                 placeholder="/images"
+                                value={formData.image}
+                                onChange={handleFormField}
                             />
                             <small id="imagehelpId" className="form-text text-muted"></small>
                         </div>
@@ -114,21 +125,22 @@ export default function AppMain() {
                         <div className="mb-3">
                             <label htmlFor="categoria" className="form-label">Categoria</label>
                             <select className="categoria" id="categoria">
-                                <option value="">Seleziona Categoria</option>
-                                <option value="tecnologia">tecnologia</option>
-                                <option value="storia">storia</option>
+                                <option value={formData.categoria} onChange={handleFormField}>Seleziona Categoria</option>
+                                <option value={formData.categoria} onChange={handleFormField}>tecnologia</option>
+                                <option value={formData.categoria} onChange={handleFormField}>storia</option>
+
                             </select>
                             <small id="categoriahelpId" className="form-text text-muted"></small>
                         </div>
 
                         <div className="form-check">
-                            <input className="form-check-input" type="checkbox" value="" id="tag" />
+                            <input className="form-check-input"
+                                type="checkbox" value={formData.tag}
+                                onChange={handleFormField}
+                                id="tag" />
                             <label className="form-check-label" htmlFor=""> available </label>
                         </div>
-                        <div className="form-check">
-                            <input className="form-check-input" type="checkbox" value="" id="" />
-                            <label className="form-check-label" htmlFor=""> not available </label>
-                        </div>
+
                         <button type="submit">
                             save
                         </button>
