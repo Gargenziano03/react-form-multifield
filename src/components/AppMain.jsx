@@ -30,6 +30,9 @@ export default function AppMain() {
         const newArticoli = articoli.filter((articolo, index) => index != articoloIndex)
         console.log(articoloIndex);
         setArticoli(newArticoli)
+    }
+
+    function handleFormSubmit(e) {
 
     }
     return (
@@ -50,19 +53,78 @@ export default function AppMain() {
                 </form>
 
                 {/*add articolo */}
-                <form>
-                    <div className="p-1 mb-2 bg-light ">
-                        <div className="container-fluid d-flex">
-                            <p className="col-md-8 fs-4 ">
-                                clicca il bottone per aggiungere un articolo
-                            </p>
-                            <button className="btn btn-primary btn-lg " type="button">
-                                Add
-                            </button>
-                        </div>
+
+                <div className="p-1 mb-2 bg-light ">
+                    <div className="container-fluid d-flex">
+                        <p className="col-md-8 fs-4 ">
+                            clicca il bottone per aggiungere un articolo
+                        </p>
+                        <button className="btn btn-primary btn-lg " type="button" popovertarget="off-canvas-form">
+                            Aggiungi
+                        </button>
+                    </div>
+                </div>
+
+                <div id="off-canvas-form" popover='true' className="p-3">
+                    <div className="d-flex justify-content-between align-items-center">
+                        <h3>aggiungi un nuovo articolo </h3>
+                        <button className="btn btn-primary btn-lg " type="button" popovertarget="off-canvas-form" popovertargetaction='hide'>
+                            chiudi
+                        </button>
                     </div>
 
-                </form>
+                    <form onSubmit={handleFormSubmit}>
+                        <div className="mb-3">
+                            <label htmlFor="name" className="form-label">Name</label>
+                            <input
+                                type="text"
+                                className="form-control"
+                                name="name"
+                                id="name"
+                                aria-describedby="articolo"
+                                placeholder="articolo"
+                            />
+                            <small id="namehelpId" className="form-text text-muted"></small>
+                        </div>
+
+                        <div className="mb-3">
+                            <label htmlFor="image" className="form-label">Image</label>
+                            <input
+                                type="text"
+                                className="form-control"
+                                name="image"
+                                id="image"
+                                aria-describedby="image"
+                                placeholder="/images"
+                            />
+                            <small id="imagehelpId" className="form-text text-muted"></small>
+                        </div>
+
+                        <div className="mb-3">
+                            <label htmlFor="categoria" className="form-label">Categoria</label>
+                            <select className="categoria" id="categoria">
+                                <option value="">Seleziona Categoria</option>
+                                <option value="tecnologia">tecnologia</option>
+                                <option value="storia">storia</option>
+                            </select>
+                            <small id="categoriahelpId" className="form-text text-muted"></small>
+                        </div>
+
+                        <div className="form-check">
+                            <input className="form-check-input" type="checkbox" value="" id="tag" />
+                            <label className="form-check-label" htmlFor=""> available </label>
+                        </div>
+                        <div className="form-check">
+                            <input className="form-check-input" type="checkbox" value="" id="" />
+                            <label className="form-check-label" htmlFor=""> not available </label>
+                        </div>
+                        <button type="submit">
+                            save
+                        </button>
+
+
+                    </form>
+                </div>
 
 
                 <ul className="list-group">
