@@ -11,10 +11,21 @@ const articoliBlog = [
     "Proteggi i Dati",
     "Impatto del 5G"
 ];
+
+const initialFormData = {
+    name: '',
+    imge: '',
+    contenuto: '',
+    categoria: '',
+    tag: ''
+
+}
 export default function AppMain() {
 
     const [articoli, setArticoli] = useState(articoliBlog)
     const [newArticoli, setNewArticoli] = useState('')
+    const [formData, setFormData] = useState()
+
     function addArticolo(e) {
         e.preventDefault()
         setArticoli([
@@ -33,7 +44,7 @@ export default function AppMain() {
     }
 
     function handleFormSubmit(e) {
-
+        e.preventDefault
     }
     return (
         <main>
