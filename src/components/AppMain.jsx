@@ -17,7 +17,7 @@ const initialFormData = {
     image: '',
     contenuto: '',
     categoria: '',
-    tag: ''
+    tag: false
 
 }
 export default function AppMain() {
@@ -25,6 +25,7 @@ export default function AppMain() {
     const [articoli, setArticoli] = useState(articoliBlog)
     const [newArticoli, setNewArticoli] = useState('')
     const [formData, setFormData] = useState(initialFormData)
+    const [addNewArticolo, setAddNewArticolo] = useState(articoli)
 
     function addArticolo(e) {
         e.preventDefault()
@@ -44,13 +45,24 @@ export default function AppMain() {
     }
 
     function handleFormSubmit(e) {
-        e.preventDefault
+        e.preventDefault()
+        const newItem = {
+            id: Date.now(),
+            ...formData
+        }
+        setAddNewArticolo([
+            newItem,
+            ...addNewArticolo
+        ])
+
     }
 
     function handleFormField(e) {
+        const value = e.target.type === 'checkbox' ? e.target.checked : e.target.value
+
         setFormData({
             ...formData,
-            [e.target.name]: e.target.value
+            [e.target.name]: value
         })
     }
     return (
@@ -123,6 +135,21 @@ export default function AppMain() {
                         </div>
 
                         <div className="mb-3">
+                            <label htmlFor="description" className="form-label">Description</label>
+
+                            <textarea
+                                className="form-control"
+                                name="contenuto"
+                                id="contenuto"
+                                rows="5"
+                                value={formData.contenuto}
+                                onChange={handleFormField}
+                            ></textarea>
+                        </div>
+
+
+
+                        <div className="mb-3">
                             <label htmlFor="categoria" className="form-label">Categoria</label>
                             <select className="categoria" id="categoria">
                                 <option value={formData.categoria} onChange={handleFormField}>Seleziona Categoria</option>
@@ -151,7 +178,7 @@ export default function AppMain() {
 
 
                 <ul className="list-group">
-                    {articoli.map((articolo, index) => <li key={index} className="list-group-item d-flex justify-content-between">
+                    {addNewArticolo.map((articolo, index) => <li key={index} className="list-group-item d-flex justify-content-between">
                         {articolo}
                         <button onClick={handleTrashArticolo} data-index={index} className="btn btn-danger">
                             <i className="bi bi-trash "></i>
