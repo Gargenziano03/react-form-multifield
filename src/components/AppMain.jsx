@@ -35,6 +35,7 @@ export default function AppMain() {
     return (
         <main>
             <div className="container">
+
                 <form onSubmit={addArticolo}>
                     <label htmlFor="articolo" className="form-label"></label>
                     <div className="input-group mb-3">
@@ -47,6 +48,22 @@ export default function AppMain() {
                         <button className="btn btn-outline-secondary" type="submit" id="button-addon2">Button</button>
                     </div>
                 </form>
+
+                {/*add articolo */}
+                <form>
+                    <div className="p-1 mb-2 bg-light ">
+                        <div className="container-fluid d-flex">
+                            <p className="col-md-8 fs-4 ">
+                                clicca il bottone per aggiungere un articolo
+                            </p>
+                            <button className="btn btn-primary btn-lg " type="button">
+                                Add
+                            </button>
+                        </div>
+                    </div>
+
+                </form>
+
 
                 <ul className="list-group">
                     {articoli.map((articolo, index) => <li key={index} className="list-group-item d-flex justify-content-between">
